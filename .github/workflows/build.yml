@@ -42,6 +42,7 @@ jobs:
 
   build-astro:
     runs-on: ubuntu-latest
+    requires: ["build"]
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
