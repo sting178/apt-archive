@@ -1,0 +1,50 @@
+---
+title: Elevate your universe 🌌
+description: "Fuabioo's custom APT repository"
+template: splash
+hero:
+  image:
+    file: ../../assets/package.svg
+  actions:
+    - text: Install
+      link: /#installation
+      icon: linux
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+## Installation
+
+<Steps>
+
+1. **Install the GPG key** for security
+
+   ```sh
+   curl -fsSL https://apt.fuabioo.com/public.gpg | sudo tee /usr/share/keyrings/apt.fuabioo.gpg > /dev/null
+   ```
+
+2. Add the list to the APT sources
+
+   ```sh
+   echo "deb [signed-by=/usr/share/keyrings/apt.fuabioo.gpg] https://apt.fuabioo.com stable main" | sudo tee /etc/apt/sources.list.d/apt.fuabioo.list
+   ```
+
+3. Verify your installation.
+
+   ```sh
+   sudo apt update
+   ```
+
+3. **(Optional)** Check that it works
+  This can be done by installing (or updating) any package
+
+   ```sh
+   sudo apt install dontrm
+   ```
+
+   ```sh
+   dontrm version
+   ```
+
+</Steps>

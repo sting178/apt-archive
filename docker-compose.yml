@@ -1,0 +1,11 @@
+services:
+  build:
+    image: registry.fabiomora.dev/apt-deb-builder:latest
+    build: .
+    volumes:
+      - .:/srv
+    working_dir: /srv
+    command: scripts/dev-container.sh
+    env_file: .env
+    environment:
+      LOG_LEVEL: DEBUG
