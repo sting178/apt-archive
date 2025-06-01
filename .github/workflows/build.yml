@@ -1,0 +1,56 @@
+name: Build APT Archive
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install, build, and upload your site output
+        uses: withastro/action@v4
+        env:
+          GITHUB_PAGES: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y wget curl gnupg jq dpkg-dev apt-utils tar && \
+          wget https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64  -O /usr/local/bin/yq && \
+          chmod +x /usr/local/bin/yq
+
+      - name: Import GPG profile
+        run: scripts/load-gpg-profile.sh
+
+      - name: Wrap binaries into .deb
+        run: |
+          for f in specs/*.yml; do
+            bash scripts/wrap-to-deb.sh "$f"
+          done
+
+      - name: Build and sign APT repo
+        run: bash scripts/build-repo.sh
+
+      - name: Copy into public assets directory
+        run: |
+          mkdir -p public
+          cp -r dists public/dists
+          cp -r pool public/pool
+          cp public.gpg public/public.gpg
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
