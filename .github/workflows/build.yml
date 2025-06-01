@@ -45,12 +45,6 @@ jobs:
           cp -r pool public/pool
           cp public.gpg public/public.gpg
 
-  build-astro:
-    runs-on: ubuntu-latest
-    requires: ["build"]
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
       - name: Install, build, and upload your site output
         uses: withastro/action@v4
         env:
