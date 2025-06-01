@@ -24,10 +24,10 @@ import { Steps } from '@astrojs/starlight/components';
    curl -fsSL https://apt.fuabioo.com/public.gpg | sudo tee /usr/share/keyrings/apt.fuabioo.gpg > /dev/null
    ```
 
-2. Add the list to the APT sources
+2. Add the list to the APT sources for your specific architecture.
 
    ```sh
-   echo "deb [signed-by=/usr/share/keyrings/apt.fuabioo.gpg] https://apt.fuabioo.com stable main" | sudo tee /etc/apt/sources.list.d/apt.fuabioo.list
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/apt.fuabioo.gpg] https://apt.fuabioo.com stable main" | sudo tee /etc/apt/sources.list.d/apt.fuabioo.list
    ```
 
 3. Verify your installation.
