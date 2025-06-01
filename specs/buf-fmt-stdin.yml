@@ -4,6 +4,7 @@ major: 0
 description: "Buf protocol buffer formatter wrapper for stdin text editor integration"
 architectures:
   amd64:
+    selector: x86_64
     url: https://github.com/Fuabioo/buf-fmt-stdin/releases/download/v${VERSION}/buf-fmt-stdin_Linux_x86_64.tar.gz
     bin_path: buf-fmt-stdin
   arm64:

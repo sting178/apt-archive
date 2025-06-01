@@ -1,0 +1,15 @@
+name: obscura
+repo: Fuabioo/obscura
+major: 0
+description: "Buf protocol buffer formatter wrapper for stdin text editor integration"
+architectures:
+  amd64:
+    selector: x86_64
+    url: https://github.com/Fuabioo/obscura/releases/download/v${VERSION}/obscura_Linux_x86_64.tar.gz
+    bin_path: obscura
+  arm64:
+    url: https://github.com/Fuabioo/obscura/releases/download/v${VERSION}/obscura_Linux_arm64.tar.gz
+    bin_path: obscura
+  armv6:
+    url: https://github.com/Fuabioo/obscura/releases/download/v${VERSION}/obscura_Linux_armv6.tar.gz
+    bin_path: obscura

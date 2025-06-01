@@ -4,6 +4,7 @@ major: 0
 description: "Subjective safe wheels for rm. Avoid messing up your system like a clown 🤡. https://dontrm.fuabioo.com/"
 architectures:
   amd64:
+    selector: x86_64
     url: https://github.com/Fuabioo/dontrm/releases/download/v${VERSION}/dontrm_Linux_x86_64.tar.gz
     bin_path: dontrm
   arm64:
@@ -12,3 +13,22 @@ architectures:
   armv6:
     url: https://github.com/Fuabioo/dontrm/releases/download/v${VERSION}/dontrm_Linux_armv6.tar.gz
     bin_path: dontrm
+postinst: |
+  #!/bin/bash
+  NoColor=''
+  Red=''
+  Green=''
+  Yellow=''
+  Dim=''
+  BoldMagenta=''
+  if [[ -t 1 ]]; then
+      NoColor='\033[0m'
+      Red='\033[0;31m'
+      Green='\033[0;32m'
+      Yellow='\033[0;33m'
+      Dim='\033[0;2m'
+      BoldMagenta='\033[1;35m'
+  fi
+  printf "${Dim}Replace ${Red}rm${Dim} with ${Green}dontrm${Dim} in your shell configuration"
+  printf "(e.g. ${BoldMagenta}.bashrc ${BoldMagenta}.zshrc${Dim}).${NoColor}"
+  printf "${Yellow}rm() {\n  dontrm \$@\n}${NoColor}\n"

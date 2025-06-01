@@ -4,7 +4,15 @@ set -e
 REPO="$1"
 MAJOR="$2"
 
-TAGS=$(curl -s "https://api.github.com/repos/$REPO/releases" | jq -r '.[].tag_name')
+# Ensure APT_GITHUB_TOKEN is set
+if [ -z "$APT_GITHUB_TOKEN" ]; then
+  echo "Error: No APT_GITHUB_TOKEN nor GH_PAT is set. Please set one in your Codespaces environment."
+  exit 1
+fi
+
+TAGS=$(curl -s \
+  -H "Authorization: Bearer ${APT_GITHUB_TOKEN}" \
+  "https://api.github.com/repos/$REPO/releases" | jq -r '.[].tag_name')
 FILTERED=$(echo "$TAGS" | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$')
 [ -n "$MAJOR" ] && FILTERED=$(echo "$FILTERED" | grep -E "^v?$MAJOR\.")
 LATEST=$(echo "$FILTERED" | sed 's/^v//' | sort -V | tail -n 1)

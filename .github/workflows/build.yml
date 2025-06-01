@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      APT_GITHUB_TOKEN: ${{ secrets.APT_GITHUB_TOKEN }}
       GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
@@ -60,4 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
