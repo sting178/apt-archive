@@ -1,0 +1,36 @@
+name: snvim
+repo: Fuabioo/static-neovim
+major: 0
+description: "Static build of neovim"
+architectures:
+  amd64:
+    url: https://github.com/Fuabioo/static-neovim/releases/download/v${VERSION}/static-neovim_Linux_amd64.tar.gz
+    bin_path: snvim
+  arm64:
+    url: https://github.com/Fuabioo/static-neovim/releases/download/v${VERSION}/static-neovim_Linux_arm64.tar.gz
+    bin_path: snvim
+  armv6:
+    url: https://github.com/Fuabioo/static-neovim/releases/download/v${VERSION}/static-neovim_Linux_armv6.tar.gz
+    bin_path: snvim
+  armv7:
+    url: https://github.com/Fuabioo/static-neovim/releases/download/v${VERSION}/static-neovim_Linux_armv7.tar.gz
+    bin_path: snvim
+postinst: |
+  #!/bin/bash
+  NoColor=''
+  Red=''
+  Green=''
+  Yellow=''
+  Dim=''
+  BoldMagenta=''
+  if [[ -t 1 ]]; then
+      NoColor='\033[0m'
+      Red='\033[0;31m'
+      Green='\033[0;32m'
+      Yellow='\033[0;33m'
+      Dim='\033[0;2m'
+      BoldMagenta='\033[1;35m'
+  fi
+  printf "${Dim}Replace ${Red}nvim${Dim} with ${Green}snvim${Dim} in your shell configuration"
+  printf "(e.g. ${BoldMagenta}.bashrc ${BoldMagenta}.zshrc${Dim}).${NoColor}"
+  printf "${Yellow}nvim() {\n  snvim \$@\n}${NoColor}\n"

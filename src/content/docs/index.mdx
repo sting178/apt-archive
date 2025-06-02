@@ -9,10 +9,15 @@ hero:
     - text: Install
       link: /#installation
       icon: linux
+    - text: Available packages
+      link: /#packages
+      icon: open-book
+      variant: secondary
 ---
 
 import { Code } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Installation
 
@@ -48,3 +53,43 @@ import { Steps } from '@astrojs/starlight/components';
    ```
 
 </Steps>
+
+## Packages
+
+<CardGrid stagger>
+  <Card title="Neovim" icon="vim">
+    Maintained static [neovim](https://neovim.io/) distribution
+		```sh
+		sudo apt install snvim
+		```
+	</Card>
+	<Card title="DON'T rm" icon="approve-check-circle">
+		[dontrm](https://dontrm.fuabioo.com)
+		helps you avoid accidentally destroying your system e.g. `sudo rm -fr /*`
+		```sh
+		sudo apt install dontrm
+		```
+	</Card>
+	<Card title="Buf formatter through stdin" icon="zed">
+	  Use [`buf`](https://buf.build/blog/introducing-buf-format)
+		straight from the stdin using [`buf-fmt-stdin`](https://github.com/Fuabioo/buf-fmt-stdin).
+		This is specially useful for the zed editor!
+		```sh
+		sudo apt install buf-fmt-stdin
+		```
+	</Card>
+	<Card title="PHP CS Fixer formatter through stdin" icon="zed">
+	  Use [`PHP-CS-Fixer`](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)
+		straight from the stdin using [`php-cs-fixer-stdin`](https://github.com/Fuabioo/php-cs-fixer-stdin).
+		This is specially useful for the zed editor!
+		```sh
+		sudo apt install php-cs-fixer-stdin
+		```
+	</Card>
+	<Card title="More comming soon" icon="rocket">
+		Learn more in [my profile](https://github.com/Fuabioo).
+		```sh
+		sudo apt install <anything>
+		```
+	</Card>
+</CardGrid>
